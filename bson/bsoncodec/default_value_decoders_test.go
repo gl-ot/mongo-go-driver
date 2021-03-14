@@ -1113,7 +1113,7 @@ func TestDefaultValueDecoders(t *testing.T) {
 					nil,
 					&bsonrwtest.ValueReaderWriter{
 						BSONType: bsontype.String,
-						Return:   "0123456789ab",
+						Return:   "303132333435363738396162",
 					},
 					bsonrwtest.ReadString,
 					nil,
@@ -2389,6 +2389,9 @@ func TestDefaultValueDecoders(t *testing.T) {
 					}
 					var got interface{}
 					if val.IsValid() && val.CanInterface() {
+						if rc.name == "success/string" {
+							fmt.Println(val.Interface().(primitive.ObjectID).Hex())
+						}
 						got = val.Interface()
 					}
 					if rc.err == nil && !cmp.Equal(got, want, cmp.Comparer(compareDecimal128)) {

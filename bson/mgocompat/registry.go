@@ -64,7 +64,7 @@ func NewRegistryBuilder() *bsoncodec.RegistryBuilder {
 	uintcodec := bsoncodec.NewUIntCodec(bsonoptions.UIntCodec().SetEncodeToMinSize(true))
 
 	rb.RegisterTypeDecoder(tEmpty, emptyInterCodec).
-		RegisterDefaultDecoder(reflect.String, bsoncodec.NewStringCodec(bsonoptions.StringCodec().SetDecodeObjectIDAsHex(false))).
+		RegisterDefaultDecoder(reflect.String, bsoncodec.NewStringCodec(bsonoptions.StringCodec().SetDecodeObjectIDAsHex(true))).
 		RegisterDefaultDecoder(reflect.Struct, structcodec).
 		RegisterDefaultDecoder(reflect.Map, mapCodec).
 		RegisterTypeEncoder(tByteSlice, bsoncodec.NewByteSliceCodec(bsonoptions.ByteSliceCodec().SetEncodeNilAsEmpty(true))).

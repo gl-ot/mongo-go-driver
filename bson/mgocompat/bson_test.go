@@ -13,6 +13,7 @@ import (
 	"encoding/binary"
 	"encoding/json"
 	"errors"
+	"fmt"
 	"net/url"
 	"reflect"
 	"strconv"
@@ -1361,7 +1362,7 @@ var twoWayCrossItems = []crossTypeItem{
 	{&struct{ S []byte }{[]byte("def")}, &struct{ S primitive.Symbol }{"def"}},
 	{&struct{ S string }{"ghi"}, &struct{ S primitive.Symbol }{"ghi"}},
 
-	{&struct{ S string }{"0123456789ab"},
+	{&struct{ S string }{"303132333435363738396162"},
 		&struct{ S primitive.ObjectID }{primitive.ObjectID{0x30, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, 0x39, 0x61, 0x62}}},
 
 	// map <=> struct
@@ -1528,6 +1529,9 @@ func testCrossPair(t *testing.T, dump interface{}, load interface{}) {
 func TestTwoWayCrossPairs(t *testing.T) {
 	for i, item := range twoWayCrossItems {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
+			if i == 40 {
+				fmt.Println()
+			}
 			testCrossPair(t, item.obj1, item.obj2)
 			testCrossPair(t, item.obj2, item.obj1)
 		})
