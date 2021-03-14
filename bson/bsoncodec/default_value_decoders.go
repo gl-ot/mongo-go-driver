@@ -740,8 +740,8 @@ func (dvd DefaultValueDecoders) objectIDDecodeType(dc DecodeContext, vr bsonrw.V
 		if err != nil {
 			return emptyValue, err
 		}
-		if len(str) != 12 {
-			return emptyValue, fmt.Errorf("an ObjectID string must be exactly 12 bytes long (got %v)", len(str))
+		if len(str) != 24 {
+			return emptyValue, fmt.Errorf("an ObjectID string must be exactly 24 characters long (got %v)", len(str))
 		}
 		byteArr := []byte(str)
 		copy(oid[:], byteArr)
